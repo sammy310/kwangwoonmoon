@@ -116,8 +116,9 @@ namespace kwangwoonmoon
             // 
             // buy_button
             // 
-            this.buy_button.BackColor = System.Drawing.Color.Red;
+            this.buy_button.BackColor = System.Drawing.Color.DarkRed;
             this.buy_button.Font = new System.Drawing.Font("굴림", 20F);
+            this.buy_button.ForeColor = System.Drawing.SystemColors.HighlightText;
             this.buy_button.Location = new System.Drawing.Point(922, 605);
             this.buy_button.Name = "buy_button";
             this.buy_button.Size = new System.Drawing.Size(144, 64);
@@ -202,8 +203,9 @@ namespace kwangwoonmoon
             // 
             // sell_button
             // 
-            this.sell_button.BackColor = System.Drawing.Color.Blue;
+            this.sell_button.BackColor = System.Drawing.Color.DarkBlue;
             this.sell_button.Font = new System.Drawing.Font("굴림", 20F);
+            this.sell_button.ForeColor = System.Drawing.SystemColors.HighlightText;
             this.sell_button.Location = new System.Drawing.Point(1072, 605);
             this.sell_button.Name = "sell_button";
             this.sell_button.Size = new System.Drawing.Size(144, 64);
@@ -219,6 +221,7 @@ namespace kwangwoonmoon
             this.news_button.TabIndex = 16;
             this.news_button.Text = "뉴스 / 정보";
             this.news_button.UseVisualStyleBackColor = true;
+            this.news_button.Click += new System.EventHandler(this.news_button_Click);
             // 
             // info_shop_button
             // 
@@ -228,6 +231,7 @@ namespace kwangwoonmoon
             this.info_shop_button.TabIndex = 17;
             this.info_shop_button.Text = "정보 상점";
             this.info_shop_button.UseVisualStyleBackColor = true;
+            this.info_shop_button.Click += new System.EventHandler(this.info_shop_button_Click);
             // 
             // plus_button
             // 
@@ -272,8 +276,10 @@ namespace kwangwoonmoon
             this.Controls.Add(this.today_label);
             this.Controls.Add(this.stock_listview);
             this.Controls.Add(this.labe1);
+            this.MinimumSize = new System.Drawing.Size(1252, 725);
             this.Name = "KWM";
             this.Text = "Kwang Woon Moon";
+            this.Load += new System.EventHandler(this.KWM_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
