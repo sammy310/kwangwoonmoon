@@ -44,7 +44,7 @@ namespace kwangwoonmoon
 
         InfoShop infoShop = null;
 
-        public long CurrentMoney { get; private set; } = 123456789;
+        public long CurrentMoney { get; private set; } = 123456;
 
 
         public KWM()
@@ -62,14 +62,28 @@ namespace kwangwoonmoon
         void InitStockList()
         {
             // For Test
-            Stock stock = new Stock("삼성전자", 10000);
-            Stock stock2 = new Stock("SK하이닉스", 122500);
+            Stock stock = new Stock("셈스", 10000);
+            Stock stock2 = new Stock("먀벤다", 12500);
             stocks.Add(stock);
             stocks.Add(stock2);
-            stocks.Add(new Stock("주식1", 78924));
-            stocks.Add(new Stock("주식2", 22036));
-            stocks.Add(new Stock("주식3", 4550));
-            stocks.Add(new Stock("주식4", 598));
+            stocks.Add(new Stock("크라니아", 13000));
+            stocks.Add(new Stock("이크로스", 20000));
+            stocks.Add(new Stock("파이논", 4550));
+            stocks.Add(new Stock("자임", 1000));
+            stocks.Add(new Stock("후차이", 8000));
+            stocks.Add(new Stock("세을티", 7500));
+            stocks.Add(new Stock("구아비", 1300));
+            stocks.Add(new Stock("날루", 2000));
+            stocks.Add(new Stock("도슬", 1350));
+            stocks.Add(new Stock("렝칼", 3000));
+            stocks.Add(new Stock("미에브", 4850));
+            stocks.Add(new Stock("체카시티", 3200));
+            stocks.Add(new Stock("타이푸", 5040));
+            stocks.Add(new Stock("헴키리", 10020));
+            stocks.Add(new Stock("락카루", 12000));
+            stocks.Add(new Stock("아메리", 18050));
+            stocks.Add(new Stock("캐다나", 16300));
+            stocks.Add(new Stock("차아나우", 7800));
             transactionList.Add(new TransactionInfo(stock, 19000, 15));
             // --------------------
         }
