@@ -171,6 +171,7 @@ namespace kwangwoonmoon
 
             SetEventToEventNInfo();
             SetTransactionListView();
+            SetEventToInfoShop();
 
             // 업데이트 된 Turn 을 label 에 적용
             if (Turn < 10) gameturn_label.Text = "0" + Turn.ToString();
@@ -366,6 +367,13 @@ namespace kwangwoonmoon
 
             infoShop.SetEventNews(CurrentEvents[CurrentEvents.Count - 1]);
             infoShop.SetBuyCount();
+        }
+
+        void SetEventToInfoShop()
+        {
+            if (infoShop == null) return;
+
+            infoShop.SetInfoAns(CurrentEvents);
         }
 
         void UpdateMoneyText()

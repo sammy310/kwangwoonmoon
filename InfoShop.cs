@@ -19,12 +19,28 @@ namespace kwangwoonmoon
         // 정보 구매 가능 횟수
         public int Count { get; private set; }
 
+        // 다음 턴 이벤트에 영향 받는 주식 리스트
+        List<Stock> InfluncedStocks = new List<Stock>();
+
 
         public InfoShop()
         {
             InitializeComponent();
 
             KWM.Instance.MoneyChanged += UpdateMoneyText;
+        }
+
+        // 다음 턴의 이벤트 정보 가져오기
+        public void SetInfoAns(List<Event> events)
+        {
+            if (events == null) return;
+            foreach (Event e in events)
+            {
+                for(int i = 0; i < e.influenceStock.Count; i++)
+                {
+                    InfluncedStocks.Add(e.influenceStock[i]);
+                }
+            }
         }
 
         private void InfoShop_Load(object sender, EventArgs e)
@@ -60,12 +76,18 @@ namespace kwangwoonmoon
         
         private void MiddleInfo_button_Click(object sender, EventArgs e)
         {
+            if (InfluncedStocks == null) return;
             if (this.Count > 0)
             {
                 if (KWM.Instance.UseMoney(MIDDLE))
                 {
                     //  정보 제공해주는 창 구현 필요
-                    MessageBox.Show("테스트 중급 정보");
+                    string stocks = "";
+                    foreach(Stock stock in InfluncedStocks)
+                    {
+                        stocks += stock.StockName + " ";
+                    }
+                    MessageBox.Show(stocks, "중급 정보");
                     this.Count--;
                 }
                 else MessageBox.Show("보유 금액이 부족합니다.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
