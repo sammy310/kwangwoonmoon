@@ -34,6 +34,7 @@ namespace kwangwoonmoon
         public void SetInfoAns(List<Event> events)
         {
             if (events == null) return;
+            if(InfluncedStocks.Count != 0) InfluncedStocks.RemoveRange(0, InfluncedStocks.Count - 1);
             foreach (Event e in events)
             {
                 for(int i = 0; i < e.influenceStock.Count; i++)
@@ -53,7 +54,7 @@ namespace kwangwoonmoon
 
         public void SetEventNews(Event e)
         {
-            this.News_label.Text = e.EventTitle;
+            this.News_label.Text = e.Title;
         }
 
         void UpdateMoneyText()
