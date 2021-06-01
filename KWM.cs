@@ -164,10 +164,16 @@ namespace kwangwoonmoon
         // 다음 턴으로 넘어감
         void NextTurn()
         {
+            ++Turn;
+
+            if (Turn >= LASTTURN + 1)
+            {
+                Ending();
+                return;
+            }
+
             // 이벤트 업데이트
             UpdateEvent();
-
-            ++Turn;
 
             SetEventToEventNInfo();
             SetTransactionListView();
@@ -182,7 +188,17 @@ namespace kwangwoonmoon
             infoShop?.SetBuyCount();
         }
 
-
+        void Ending()
+        {
+            nextTurn_button.Text = "결과 보기";
+            long totalMoney = CurrentMoney;
+            foreach (TransactionInfo transinf in transactionList)
+            {
+                totalMoney += transinf.EvaluationAmount;
+            }
+            string endingText = "최종 보유 금액 : " + String.Format("{0:#,###}", totalMoney);
+            MessageBox.Show(endingText);
+        }
 
         // Event
 
