@@ -164,6 +164,9 @@ namespace kwangwoonmoon
         // 다음 턴으로 넘어감
         void NextTurn()
         {
+            // 이벤트 업데이트
+            UpdateEvent();
+
             ++Turn;
 
             if (Turn >= LASTTURN + 1)
@@ -171,9 +174,6 @@ namespace kwangwoonmoon
                 Ending();
                 return;
             }
-
-            // 이벤트 업데이트
-            UpdateEvent();
 
             SetEventToEventNInfo();
             SetTransactionListView();
