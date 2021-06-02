@@ -194,7 +194,6 @@ namespace kwangwoonmoon
             this.mystock_listview.TabIndex = 37;
             this.mystock_listview.UseCompatibleStateImageBehavior = false;
             this.mystock_listview.SelectedIndexChanged += new System.EventHandler(this.mystock_listview_SelectedIndexChanged);
-            this.mystock_listview.Click += new System.EventHandler(this.mystock_listview_Click);
             // 
             // label2
             // 
@@ -241,7 +240,6 @@ namespace kwangwoonmoon
             this.stock_listview.TabIndex = 28;
             this.stock_listview.UseCompatibleStateImageBehavior = false;
             this.stock_listview.SelectedIndexChanged += new System.EventHandler(this.stock_listview_SelectedIndexChanged);
-            this.stock_listview.Click += new System.EventHandler(this.stock_listview_Click);
             // 
             // labe1
             // 

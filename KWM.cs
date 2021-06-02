@@ -47,6 +47,10 @@ namespace kwangwoonmoon
         public long CurrentMoney { get; private set; } = 123456;
 
 
+        ListViewItem selectedItem = null;
+        bool isSell = false;
+
+
         public KWM()
         {
             InitializeComponent();
@@ -156,8 +160,7 @@ namespace kwangwoonmoon
 
             // 라벨 Text 값 초기화
             this.finish_label.Text = "/ " + LASTTURN.ToString();
-            this.mymoney_label.Text = String.Format("{0:#,###}", CurrentMoney);
-            this.total_amount_textbox.Text = "0";
+            MoneyChanged.Invoke();
         }
 
 
@@ -178,6 +181,8 @@ namespace kwangwoonmoon
             SetEventToEventNInfo();
             SetTransactionListView();
             SetEventToInfoShop();
+
+            UpdateStockInfoText();
 
             // 업데이트 된 Turn 을 label 에 적용
             if (Turn < 10) gameturn_label.Text = "0" + Turn.ToString();
@@ -356,18 +361,15 @@ namespace kwangwoonmoon
         //mystock_listview 선택 함수
         private void mystock_listview_SelectedIndexChanged(object sender, EventArgs e)
         {
-            bool selected = mystock_listview.SelectedItems.Count > 0;
-            total_amount_textbox.Enabled = price_textbox.Enabled = selected;
-            if (selected == false)
+            if (mystock_listview.SelectedItems.Count == 0)
             {
-                ClearInputControl();
-                return;
+                SetEnableButton(false);
             }
-            ListViewItem lvi = mystock_listview.SelectedItems[0];
-            TransactionInfo info = (TransactionInfo)lvi.Tag;
-            lb_Selected.Text = info.StockName;
-            price_textbox.Text = string.Format("{0:#,###}", info.CurrentStockPrice);
-            total_amount_textbox.Text = info.StockQuantity.ToString();
+            else
+            {
+                SetButtonToSell();
+                UpdateStockInfoText();
+            }
         }
 
 
@@ -462,18 +464,39 @@ namespace kwangwoonmoon
 
         private void stock_listview_SelectedIndexChanged(object sender, EventArgs e)
         {
-            bool selected = stock_listview.SelectedItems.Count > 0;
-            total_amount_textbox.Enabled = price_textbox.Enabled = selected;
-            if (selected == false)
+            if (stock_listview.SelectedItems.Count == 0)
             {
-                ClearInputControl();
+                SetEnableButton(false);
+            }
+            else
+            {
+                SetButtonToBuy();
+                UpdateStockInfoText();
+            }
+        }
+
+        void UpdateStockInfoText()
+        {
+            if (selectedItem == null || lb_Selected.Enabled == false)
+            {
+                SetEnableButton(false);
                 return;
             }
-            ListViewItem lvi = stock_listview.SelectedItems[0];
-            Stock info = (Stock)lvi.Tag;
-            lb_Selected.Text = info.StockName;
-            total_amount_textbox.Text = "0";
-            price_textbox.Text = string.Format("{0:#,###}", info.StockPrice);
+
+            if (isSell)
+            {
+                TransactionInfo info = (TransactionInfo)selectedItem.Tag;
+                lb_Selected.Text = info.StockName;
+                price_textbox.Text = string.Format("{0:#,###}", info.CurrentStockPrice);
+                total_amount_textbox.Text = info.StockQuantity.ToString();
+            }
+            else
+            {
+                Stock info = (Stock)selectedItem.Tag;
+                lb_Selected.Text = info.StockName;
+                total_amount_textbox.Text = "1";
+                price_textbox.Text = string.Format("{0:#,###}", info.StockPrice);
+            }
         }
 
         private void plus_button_Click(object sender, EventArgs e)
@@ -670,23 +693,54 @@ namespace kwangwoonmoon
             }
         }
 
+        void SetEnableButton(bool isEnabled)
+        {
+            lb_Selected.Enabled = isEnabled;
+            price_textbox.Enabled = isEnabled;
+            total_amount_textbox.Enabled = isEnabled;
+            plus_button.Enabled = isEnabled;
+            minus_button.Enabled = isEnabled;
+
+            trade_button.Enabled = isEnabled;
+            if (!isEnabled)
+            {
+                ClearInputControl();
+
+                trade_button.Text = "매수/매도";
+                trade_button.ForeColor = Color.Black;
+                trade_button.BackColor = Color.Gainsboro;
+            }
+        }
+
+        void SetButtonToBuy()
+        {
+            mystock_listview.SelectedItems.Clear();
+            SetEnableButton(true);
+            selectedItem = stock_listview.SelectedItems[0];
+            isSell = false;
+
+            trade_button.Text = "매수";
+            trade_button.ForeColor = Color.White;
+            trade_button.BackColor = Color.IndianRed;
+        }
+
+        void SetButtonToSell()
+        {
+            stock_listview.SelectedItems.Clear();
+            SetEnableButton(true);
+            selectedItem = mystock_listview.SelectedItems[0];
+            isSell = true;
+
+            trade_button.Text = "매도";
+            trade_button.ForeColor = Color.White;
+            trade_button.BackColor = Color.MediumBlue;
+        }
+
         public void buttoninitialize()
         {
             //버튼 초기값
             trade_button.Text = "매수/매도";
             trade_button.BackColor = Color.Gainsboro;
-        }
-
-        private void stock_listview_Click(object sender, EventArgs e)
-        {
-            trade_button.BackColor = Color.IndianRed;
-            trade_button.Text = "매수";
-        }
-
-        private void mystock_listview_Click(object sender, EventArgs e)
-        {
-            trade_button.BackColor = Color.Aqua;
-            trade_button.Text = "매도";
         }
     }
 }
