@@ -47,6 +47,9 @@
   <event size="1" type="up">
     <title>{0} 나라에 첫 노벨평화상 수상자 등장..! 힘든 환경 속 사소한 실천이 중요..</title>
   </event>
+	<event size="1" type="up">
+		<title>{0} 나라에서 지구에는 존재하지 않는 새로운 물질 발견..! 활용 가능성 논의 중.</title>
+	</event>
   <event size="0" type="down">
     <title>전세계를 강타한 B 사건.. 해결책은 존재하는가..?</title>
     <affectevent>

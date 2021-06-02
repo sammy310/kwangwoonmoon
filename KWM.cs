@@ -44,7 +44,7 @@ namespace kwangwoonmoon
 
         InfoShop infoShop = null;
 
-        public long CurrentMoney { get; private set; } = 123456789;
+        public long CurrentMoney { get; private set; } = 123456;
 
 
         public KWM()
@@ -62,14 +62,28 @@ namespace kwangwoonmoon
         void InitStockList()
         {
             // For Test
-            Stock stock = new Stock("삼성전자", 10000);
-            Stock stock2 = new Stock("SK하이닉스", 122500);
+            Stock stock = new Stock("셈스", 10000);
+            Stock stock2 = new Stock("먀벤다", 12500);
             stocks.Add(stock);
             stocks.Add(stock2);
-            stocks.Add(new Stock("주식1", 78924));
-            stocks.Add(new Stock("주식2", 22036));
-            stocks.Add(new Stock("주식3", 4550));
-            stocks.Add(new Stock("주식4", 598));
+            stocks.Add(new Stock("크라니아", 13000));
+            stocks.Add(new Stock("이크로스", 20000));
+            stocks.Add(new Stock("파이논", 4550));
+            stocks.Add(new Stock("자임", 1000));
+            stocks.Add(new Stock("후차이", 8000));
+            stocks.Add(new Stock("세을티", 7500));
+            stocks.Add(new Stock("구아비", 1300));
+            stocks.Add(new Stock("날루", 2000));
+            stocks.Add(new Stock("도슬", 1350));
+            stocks.Add(new Stock("렝칼", 3000));
+            stocks.Add(new Stock("미에브", 4850));
+            stocks.Add(new Stock("체카시티", 3200));
+            stocks.Add(new Stock("타이푸", 5040));
+            stocks.Add(new Stock("헴키리", 10020));
+            stocks.Add(new Stock("락카루", 12000));
+            stocks.Add(new Stock("아메리", 18050));
+            stocks.Add(new Stock("캐다나", 16300));
+            stocks.Add(new Stock("차아나우", 7800));
             transactionList.Add(new TransactionInfo(stock, 19000, 15));
             // --------------------
         }
@@ -150,13 +164,20 @@ namespace kwangwoonmoon
         // 다음 턴으로 넘어감
         void NextTurn()
         {
+            ++Turn;
+
+            if (Turn >= LASTTURN + 1)
+            {
+                Ending();
+                return;
+            }
+
             // 이벤트 업데이트
             UpdateEvent();
 
-            ++Turn;
-
             SetEventToEventNInfo();
             SetTransactionListView();
+            SetEventToInfoShop();
 
             // 업데이트 된 Turn 을 label 에 적용
             if (Turn < 10) gameturn_label.Text = "0" + Turn.ToString();
@@ -167,7 +188,17 @@ namespace kwangwoonmoon
             infoShop?.SetBuyCount();
         }
 
-
+        void Ending()
+        {
+            nextTurn_button.Text = "결과 보기";
+            long totalMoney = CurrentMoney;
+            foreach (TransactionInfo transinf in transactionList)
+            {
+                totalMoney += transinf.EvaluationAmount;
+            }
+            string endingText = "최종 보유 금액 : " + String.Format("{0:#,###}", totalMoney);
+            MessageBox.Show(endingText);
+        }
 
         // Event
 
@@ -354,6 +385,13 @@ namespace kwangwoonmoon
             infoShop.SetBuyCount();
         }
 
+        void SetEventToInfoShop()
+        {
+            if (infoShop == null) return;
+
+            infoShop.SetInfoAns(CurrentEvents);
+        }
+
         void UpdateMoneyText()
         {
             mymoney_label.Text = string.Format("{0:#,###}", CurrentMoney);
@@ -421,143 +459,6 @@ namespace kwangwoonmoon
                 e.Handled = true;
             }
         }
-
-        //Sell Button
-        private void sell_button_Click(object sender, EventArgs e)
-        {
-            bool selected = mystock_listview.SelectedItems.Count > 0;
-            if (selected == false)
-            {
-                MessageBox.Show("종목을 선택해 주세요", "종목 선택 오류", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
-
-            }
-            else
-            {
-                ListViewItem lvi = mystock_listview.SelectedItems[0];
-                TransactionInfo info = (TransactionInfo)lvi.Tag;
-
-                int stockWantQuantity = Convert.ToInt32(total_amount_textbox.Text);
-
-                long totalPrice = (info.CurrentStockPrice * stockWantQuantity);
-
-                if (stockWantQuantity > info.StockQuantity)
-                {
-                    MessageBox.Show("판매 가능 수량을 초과하였습니다.", "판매 수량 초과", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-                else
-                {
-
-                    //For DoubleCheck MessageBox
-                    DialogResult DoubleCheck = MessageBox.Show("종목명:" + info.StockName + "\n\n현재가:" + String.Format("{0:#,0}", info.CurrentStockPrice) + "원\n\n수량:" + stockWantQuantity + "\n\n총액:" + String.Format("{0:#,0}", totalPrice) + "원\n\n매도주문 하시겠습니까?",
-                     "매도 주문 확인", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-
-                    switch (DoubleCheck)
-                    {
-                        case DialogResult.Yes:
-                            long totalBenefit = info.AverageBuyingPrice * stockWantQuantity;
-                            AddMoney(totalBenefit);
-
-                            info.DecreaseStockQuantity(stockWantQuantity);
-                            lvi.SubItems[TransactionListColumnType.StockQuantity.ToString()].Text = info.StockQuantity.ToString();
-                            if (info.StockQuantity <= 0)
-                            {
-                                ClearInputControl();
-                                mystock_listview.Items.Remove(lvi);
-                                transactionList.Remove(info);
-                            }
-
-                            break;
-
-                        case DialogResult.No:
-                            break;
-
-                    }
-
-                }
-            }
-        }
-
-        // Buy Button
-        private void buy_button_Click(object sender, EventArgs e)
-        {
-
-
-
-            bool selected = stock_listview.SelectedItems.Count > 0;
-            if (selected == false)
-            {
-                MessageBox.Show("종목을 선택해 주세요.", "종목 선택 오류", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
-
-            }
-            else
-            {
-
-                // stock_listView 처리
-                ListViewItem lviyet = stock_listview.SelectedItems[0];
-                Stock stock = (Stock)lviyet.Tag;
-                // mystock_listView 처리
-                ListViewItem lvi = mystock_listview.Items[0];
-                TransactionInfo info = (TransactionInfo)lvi.Tag;
-
-
-
-                int stockWantQuantity = Convert.ToInt32(total_amount_textbox.Text);
-                long totalPrice = Convert.ToUInt32(price_textbox.Text.Replace(",", "")) * stockWantQuantity;
-
-
-
-                //For DoubleCheck MessageBox
-                DialogResult DoubleCheckBuy = MessageBox.Show("종목명:" + stock.StockName + "\n\n현재가:" + String.Format("{0:#,0}", stock.StockPrice) + "원\n\n수량:" + stockWantQuantity + "\n\n총액:" + String.Format("{0:#,0}", totalPrice) + "원\n\n매수주문 하시겠습니까?",
-                 "매수 주문 확인", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-
-
-                switch (DoubleCheckBuy)
-                {
-                    case DialogResult.Yes:
-
-                        if (totalPrice > CurrentMoney)
-                        {
-                            MessageBox.Show("현재잔고가 부족합니다.", "잔고 부족", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        }
-                        else
-                        {
-
-
-                            UseMoney(totalPrice);
-
-
-                            if (info.StockName == stock.StockName)
-                            {//  마이 스탁 리스트뷰 Quantitiy만 증가
-
-                                info.AddTransaction(info.CurrentStockPrice, stockWantQuantity);
-                                SetTransactionListView();
-                                ClearInputControl();
-
-
-                            }
-                            else
-                            {
-                                TransactionInfo transaction = new TransactionInfo(stock, stock.StockPrice, stockWantQuantity);
-                                transactionList.Add(transaction);
-                                SetTransactionListView();
-                                ClearInputControl();
-                            }
-                        }
-
-                        break;
-
-                    case DialogResult.No:
-
-                        break;
-
-
-                }
-            }
-        }
-
-
 
         private void stock_listview_SelectedIndexChanged(object sender, EventArgs e)
         {
