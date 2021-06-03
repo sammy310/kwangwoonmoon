@@ -98,12 +98,29 @@ namespace kwangwoonmoon
 
         private void AdvanceInfo_button_Click(object sender, EventArgs e)
         {
+     
+
             if (this.Count > 0)
             {
                 if (KWM.Instance.UseMoney(ADVANCE))
                 {
                     // 정보 제공해주는 창 구현 필요
-                    MessageBox.Show("테스트 고급 정보");
+                    string stocks = "";
+                    foreach (Stock stock in InfluncedStocks)
+                    {
+                        if (stock.NextStockRatio > 0)
+                        {
+                            stocks += "'"+stock.StockName+ "'" + " 종목은 다음 턴에서" + " '상승' " +  "할 것으로 예측됩니다..!" + "\n\n";
+
+                        }
+                        else
+                        {
+                            stocks += "'"+stock.StockName+ "'" + " 종목은 다음 턴에서" + " '하락' "+ "할 것으로 예측됩니다..!" + "\n\n";
+                        }
+                        
+                    }
+                    MessageBox.Show(stocks, "고급 정보");
+                    this.Count--;
                 }
                 else MessageBox.Show("보유 금액이 부족합니다.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }

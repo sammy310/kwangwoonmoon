@@ -65,11 +65,14 @@ namespace kwangwoonmoon
 
         void InitStockList()
         {
-            // For Test
+            // 종목 리스트
+            /*
             Stock stock = new Stock("셈스", 10000);
             Stock stock2 = new Stock("먀벤다", 12500);
             stocks.Add(stock);
-            stocks.Add(stock2);
+            stocks.Add(stock2);*/
+            stocks.Add(new Stock("셈스", 12500));
+            stocks.Add(new Stock("셈스", 10000));
             stocks.Add(new Stock("크라니아", 13000));
             stocks.Add(new Stock("이크로스", 20000));
             stocks.Add(new Stock("파이논", 4550));
@@ -89,7 +92,7 @@ namespace kwangwoonmoon
             stocks.Add(new Stock("캐다나", 16300));
             stocks.Add(new Stock("차아나우", 7800));
 
-            transactionList.Add(new TransactionInfo(stock, 19000, 15));
+            /*transactionList.Add(new TransactionInfo(stock, 19000, 15));*/
             // --------------------
         }
 
