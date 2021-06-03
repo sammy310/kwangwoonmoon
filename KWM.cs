@@ -280,7 +280,7 @@ namespace kwangwoonmoon
         {
             if (eventNInfo == null) return;
 
-            eventNInfo.SetEventListView(CurrentEvents);
+            eventNInfo.SetInfoListView(CurrentEvents);
         }
 
 
@@ -459,6 +459,7 @@ namespace kwangwoonmoon
                 eventNInfo.Owner = this;
 
                 SetEventToEventNInfo();
+                setInfoToEventNInfo();
             }
 
             eventNInfo.Show();
