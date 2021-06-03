@@ -18,6 +18,8 @@ namespace kwangwoonmoon
 
     public class TransactionInfo
     {
+        public System.Windows.Forms.ListViewItem ReferenceInfo = null;
+
         public Stock targetStock;
 
         public long AverageBuyingPrice { get; private set; }
@@ -84,9 +86,19 @@ namespace kwangwoonmoon
             StockQuantity += quantity;
         }
 
-        public void DecreaseStockQuantity(int quantity)
+        public bool DecreaseStockQuantity(int quantity)
         {
             StockQuantity -= quantity;
+
+            if (StockQuantity <= 0)
+            {
+                return false;
+            }
+            else
+            {
+                ReferenceInfo.SubItems[TransactionListColumnType.StockQuantity.ToString()].Text = StockQuantity.ToString();
+                return true;
+            }
         }
 
     }
