@@ -316,6 +316,7 @@ namespace kwangwoonmoon
             this.total_amount_textbox.TabIndex = 57;
             this.total_amount_textbox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.total_amount_textbox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.number_textbox_KeyPress);
+            this.total_amount_textbox.Leave += new System.EventHandler(this.total_amount_textbox_Leave);
             // 
             // price_textbox
             // 
