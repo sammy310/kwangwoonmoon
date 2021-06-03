@@ -182,8 +182,9 @@ namespace kwangwoonmoon
             }
 
             SetEventToEventNInfo();
+            setInfoToEventNInfo();
             SetTransactionListView();
-            SetEventToInfoShop();
+            SetToInfoShop();
 
             UpdateStockInfoText();
 
@@ -269,6 +270,13 @@ namespace kwangwoonmoon
 
         // EventNInfo 폼의 ListView에 이벤트 설정
         void SetEventToEventNInfo()
+        {
+            if (eventNInfo == null) return;
+
+            eventNInfo.SetEventListView(CurrentEvents);
+        }
+
+        void setInfoToEventNInfo()
         {
             if (eventNInfo == null) return;
 
@@ -395,12 +403,6 @@ namespace kwangwoonmoon
 
             infoShop.SetEventNews(CurrentEvents[CurrentEvents.Count - 1]);
             infoShop.SetBuyCount();
-        }
-
-        void SetEventToInfoShop()
-        {
-            if (infoShop == null) return;
-
             infoShop.SetInfoAns(CurrentEvents);
         }
 
@@ -415,9 +417,9 @@ namespace kwangwoonmoon
             {
                 infoShop = new InfoShop();
                 infoShop.Owner = this;
-            }
 
-            SetToInfoShop();
+                SetToInfoShop();
+            }
 
             infoShop.Show();
             infoShop.Focus();
