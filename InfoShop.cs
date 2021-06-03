@@ -34,6 +34,7 @@ namespace kwangwoonmoon
         public void SetInfoAns(List<Event> events)
         {
             MiddleInfo_button.Enabled = true;
+            AdvanceInfo_button.Enabled = true;
             if (events == null) return;
             if(InfluncedStocks.Count != 0) InfluncedStocks.RemoveRange(0, InfluncedStocks.Count - 1);
             foreach (Event e in events)
@@ -148,7 +149,7 @@ namespace kwangwoonmoon
 
                     MessageBox.Show(stocks, "고급 정보");
                     this.Count--;
-                    
+                    AdvanceInfo_button.Enabled = false;
                 }
                 else MessageBox.Show("보유 금액이 부족합니다.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
