@@ -83,11 +83,29 @@ namespace kwangwoonmoon
                 if (KWM.Instance.UseMoney(MIDDLE))
                 {
                     //  정보 제공해주는 창 구현 필요
-                    string stocks = "";
+                    string stocks = "상승주 : ";
                     foreach(Stock stock in InfluncedStocks)
                     {
-                        stocks += stock.StockName + " ";
+                        if (stock.NextStockRatio >= 0)
+                        {
+                            if (!stocks.Contains(stock.StockName))
+                            {
+                                stocks += stock.StockName + " ";
+                            }
+                        }
                     }
+                    stocks += "\n하향주 : ";
+                    foreach(Stock stock in InfluncedStocks)
+                    {
+                        if(stock.NextStockRatio < 0)
+                        {
+                            if (!stocks.Contains(stock.StockName))
+                            {
+                                stocks += stock.StockName + " ";
+                            }
+                        }
+                    }
+
                     MessageBox.Show(stocks, "중급 정보");
                     this.Count--;
                 }
