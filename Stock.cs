@@ -32,7 +32,7 @@ namespace kwangwoonmoon
         // 등락률
         public float StockRatio { get; private set; }
 
-        float NextStockRatio { get; set; }
+        public float NextStockRatio { get; private set; }
 
         public Stock(string name, long price)
         {

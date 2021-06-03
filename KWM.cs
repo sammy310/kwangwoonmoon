@@ -173,6 +173,8 @@ namespace kwangwoonmoon
 
             ++Turn;
 
+            UpdateEventStockRatio();
+
             if (Turn >= LASTTURN + 1)
             {
                 Ending();
@@ -225,6 +227,14 @@ namespace kwangwoonmoon
             return ev;
         }
 
+        void UpdateEventStockRatio()
+        {
+            foreach (Event e in CurrentEvents)
+            {
+                e.StockUpdate(); // Stock 등락률 갱신
+            }
+        }
+
         /*
          * 이벤트 업데이트
          * 이벤트를 업데이트 하고, 업데이트 된 이벤트를 바탕으로 Stock을 갱신함
@@ -237,8 +247,6 @@ namespace kwangwoonmoon
             {
                 foreach (Event e in CurrentEvents)
                 {
-                    e.StockUpdate(); // Stock 등락률 갱신
-
                     foreach (Event ie in e.influenceEvent)
                     {
                         newEvents.Add(ie);
