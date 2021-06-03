@@ -501,17 +501,38 @@ namespace kwangwoonmoon
 
         private void plus_button_Click(object sender, EventArgs e)
         {
-            if (total_amount_textbox.Text.Length == 0) total_amount_textbox.Text = "0";
+            if (total_amount_textbox.Text.Length == 0) total_amount_textbox.Text = "1";
+
+
+            int amount = int.Parse(total_amount_textbox.Text) + 1;
+            if (isSell)
+            {
+                int quantity = ((TransactionInfo)selectedItem.Tag).StockQuantity;
+                if (quantity < amount)
+                {
+                    return;
+                }
+            }
+            else
+            {
+                long stockPrice = ((Stock)selectedItem.Tag).StockPrice;
+                long totalStockPrice = stockPrice * amount;
+                if (totalStockPrice > CurrentMoney)
+                {
+                    return;
+                }
+            }
 
             total_amount_textbox.Text = (Convert.ToInt32(total_amount_textbox.Text) + 1).ToString();
+
             // 수량에 증가에 따른 총액 업데이트 필요
         }
 
         private void minus_button_Click(object sender, EventArgs e)
         {
-            if (total_amount_textbox.Text.Length == 0) total_amount_textbox.Text = "0";
+            if (total_amount_textbox.Text.Length == 0) total_amount_textbox.Text = "1";
 
-            if (Convert.ToInt32(total_amount_textbox.Text) <= 0) total_amount_textbox.Text = "0";
+            if (Convert.ToInt32(total_amount_textbox.Text) <= 1) total_amount_textbox.Text = "1";
             else total_amount_textbox.Text = (Convert.ToInt32(total_amount_textbox.Text) - 1).ToString();
             // 수량에 감소에 따른 총액 업데이트 필요
         }
@@ -695,6 +716,8 @@ namespace kwangwoonmoon
 
         void SetEnableButton(bool isEnabled)
         {
+            selectedItem = null;
+
             lb_Selected.Enabled = isEnabled;
             price_textbox.Enabled = isEnabled;
             total_amount_textbox.Enabled = isEnabled;
@@ -741,6 +764,37 @@ namespace kwangwoonmoon
             //버튼 초기값
             trade_button.Text = "매수/매도";
             trade_button.BackColor = Color.Gainsboro;
+        }
+
+        private void total_amount_textbox_Leave(object sender, EventArgs e)
+        {
+            if (!total_amount_textbox.Enabled) return;
+
+            int amount = int.Parse(total_amount_textbox.Text);
+
+            if (amount < 1)
+            {
+                total_amount_textbox.Text = "1";
+                return;
+            }
+
+            if (isSell)
+            {
+                int quantity = ((TransactionInfo)selectedItem.Tag).StockQuantity;
+                if (quantity < amount)
+                {
+                    total_amount_textbox.Text = quantity.ToString();
+                }
+            }
+            else
+            {
+                long stockPrice = ((Stock)selectedItem.Tag).StockPrice;
+                long totalStockPrice = stockPrice * amount;
+                if (totalStockPrice > CurrentMoney)
+                {
+                    total_amount_textbox.Text = (CurrentMoney / stockPrice).ToString();
+                }
+            }
         }
     }
 }
