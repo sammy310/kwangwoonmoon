@@ -122,7 +122,7 @@ namespace kwangwoonmoon
                 {
                     if (!advance.Contains(stock.StockName))
                     {
-                        advance += stock.StockName + " : " + stock.NextStockRatio + "%\n";
+                        advance += stock.StockName + " : " + stock.NextStockRatio + "%, ";
                     }
                 }
             }
@@ -137,7 +137,7 @@ namespace kwangwoonmoon
                 {
                     if (!advance.Contains(stock.StockName))
                     {
-                        advance += stock.StockName + " : " + stock.NextStockRatio + "%\n";
+                        advance += stock.StockName + " : " + stock.NextStockRatio + "%, ";
                     }
                 }
             }
@@ -175,6 +175,7 @@ namespace kwangwoonmoon
             eventListView.Columns[eventListView.Columns.Count - 1].Width = -1;
 
             infoListView.Columns.Add("info", "구매한 정보");
+            infoListView.Columns[infoListView.Columns.Count - 1].Width = -1;
 
             // Test
             eventListView.Columns.Add("target", "Stock");

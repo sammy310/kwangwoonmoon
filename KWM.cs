@@ -150,6 +150,8 @@ namespace kwangwoonmoon
 
         private void KWM_Load(object sender, EventArgs e)
         {
+            CreateEventNInfo();
+
             InitStockList();
             InitEventList();
             InitStockListView();
@@ -477,12 +479,20 @@ namespace kwangwoonmoon
 
         // Button Events
 
-        private void news_button_Click(object sender, EventArgs e)
+        void CreateEventNInfo()
         {
             if (eventNInfo == null)
             {
                 eventNInfo = new EventNInfo();
                 eventNInfo.Owner = this;
+            }
+        }
+
+        private void news_button_Click(object sender, EventArgs e)
+        {
+            if (eventNInfo == null)
+            {
+                CreateEventNInfo();
 
                 SetEventToEventNInfo();
             }
