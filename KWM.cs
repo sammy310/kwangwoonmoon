@@ -182,8 +182,9 @@ namespace kwangwoonmoon
             }
 
             SetEventToEventNInfo();
+            setInfoToEventNInfo();
             SetTransactionListView();
-            SetEventToInfoShop();
+            SetToInfoShop();
 
             UpdateStockInfoText();
 
@@ -273,6 +274,13 @@ namespace kwangwoonmoon
             if (eventNInfo == null) return;
 
             eventNInfo.SetEventListView(CurrentEvents);
+        }
+
+        void setInfoToEventNInfo()
+        {
+            if (eventNInfo == null) return;
+
+            eventNInfo.SetInfoListView(CurrentEvents);
         }
 
 
@@ -395,12 +403,6 @@ namespace kwangwoonmoon
 
             infoShop.SetEventNews(CurrentEvents[CurrentEvents.Count - 1]);
             infoShop.SetBuyCount();
-        }
-
-        void SetEventToInfoShop()
-        {
-            if (infoShop == null) return;
-
             infoShop.SetInfoAns(CurrentEvents);
         }
 
@@ -415,9 +417,9 @@ namespace kwangwoonmoon
             {
                 infoShop = new InfoShop();
                 infoShop.Owner = this;
-            }
 
-            SetToInfoShop();
+                SetToInfoShop();
+            }
 
             infoShop.Show();
             infoShop.Focus();
@@ -457,6 +459,7 @@ namespace kwangwoonmoon
                 eventNInfo.Owner = this;
 
                 SetEventToEventNInfo();
+                setInfoToEventNInfo();
             }
 
             eventNInfo.Show();

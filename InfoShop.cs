@@ -33,6 +33,8 @@ namespace kwangwoonmoon
         // 다음 턴의 이벤트 정보 가져오기
         public void SetInfoAns(List<Event> events)
         {
+            MiddleInfo_button.Enabled = true;
+            AdvanceInfo_button.Enabled = true;
             if (events == null) return;
             if(InfluncedStocks.Count != 0) InfluncedStocks.RemoveRange(0, InfluncedStocks.Count - 1);
             foreach (Event e in events)
@@ -83,13 +85,32 @@ namespace kwangwoonmoon
                 if (KWM.Instance.UseMoney(MIDDLE))
                 {
                     //  정보 제공해주는 창 구현 필요
-                    string stocks = "";
+                    string stocks = "상승주 : ";
                     foreach(Stock stock in InfluncedStocks)
                     {
-                        stocks += stock.StockName + " ";
+                        if (stock.NextStockRatio > 0)
+                        {
+                            if (!stocks.Contains(stock.StockName))
+                            {
+                                stocks += stock.StockName + " ";
+                            }
+                        }
                     }
+                    stocks += "\n하향주 : ";
+                    foreach(Stock stock in InfluncedStocks)
+                    {
+                        if(stock.NextStockRatio < 0)
+                        {
+                            if (!stocks.Contains(stock.StockName))
+                            {
+                                stocks += stock.StockName + " ";
+                            }
+                        }
+                    }
+
                     MessageBox.Show(stocks, "중급 정보");
                     this.Count--;
+                    MiddleInfo_button.Enabled = false;
                 }
                 else MessageBox.Show("보유 금액이 부족합니다.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -103,7 +124,32 @@ namespace kwangwoonmoon
                 if (KWM.Instance.UseMoney(ADVANCE))
                 {
                     // 정보 제공해주는 창 구현 필요
-                    MessageBox.Show("테스트 고급 정보");
+                    string stocks = "-상승주-\n";
+                    foreach (Stock stock in InfluncedStocks)
+                    {
+                        if (stock.NextStockRatio > 0)
+                        {
+                            if (!stocks.Contains(stock.StockName))
+                            {
+                                stocks += stock.StockName + " : " + stock.NextStockRatio + "%\n";
+                            }
+                        }
+                    }
+                    stocks += "\n-하향주-\n";
+                    foreach (Stock stock in InfluncedStocks)
+                    {
+                        if (stock.NextStockRatio < 0)
+                        {
+                            if (!stocks.Contains(stock.StockName))
+                            {
+                                stocks += stock.StockName + " : " + stock.NextStockRatio + "%\n";
+                            }
+                        }
+                    }
+
+                    MessageBox.Show(stocks, "고급 정보");
+                    this.Count--;
+                    AdvanceInfo_button.Enabled = false;
                 }
                 else MessageBox.Show("보유 금액이 부족합니다.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
