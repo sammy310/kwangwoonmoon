@@ -56,11 +56,10 @@ namespace kwangwoonmoon
             }
         }
 
-        public void SetInfoListView(List<Event> events)
+        public void SetMiddleInfoListView(List<Event> events)
         {
             if (events == null) return;
 
-            infoListView.Items.Clear();
             List<Stock> stocks = new List<Stock>();
             // 현재 Event 들에게 영향 받는 Stock 들의 List
             foreach(Event e in events)
@@ -83,7 +82,7 @@ namespace kwangwoonmoon
                 }
             }
             ListViewItem middle1 = infoListView.Items.Add(new ListViewItem());
-            middle1.Name = "middle";
+            middle1.Name = "info";
             middle1.Text = middle;
 
             middle = "하향주 : ";
@@ -98,9 +97,23 @@ namespace kwangwoonmoon
                 }
             }
             ListViewItem middle2 = infoListView.Items.Add(new ListViewItem());
-            middle2.Name = "middle";
+            middle2.Name = "info";
             middle2.Text = middle;
+        }
 
+        public void SetAdvanceInfoListView(List<Event> events)
+        {
+            if (events == null) return;
+
+            List<Stock> stocks = new List<Stock>();
+            // 현재 Event 들에게 영향 받는 Stock 들의 List
+            foreach (Event e in events)
+            {
+                for (int i = 0; i < e.InfluenceStockSize; i++)
+                {
+                    stocks.Add(e.influenceStock[i]);
+                }
+            }
             // 고급 정보 Text 제작
             string advance = "-상승주- ";
             foreach (Stock stock in stocks)
@@ -113,8 +126,8 @@ namespace kwangwoonmoon
                     }
                 }
             }
-            var adv1 = middle1.SubItems.Add(new ListViewItem.ListViewSubItem());
-            adv1.Name = "advance";
+            ListViewItem adv1 = infoListView.Items.Add(new ListViewItem());
+            adv1.Name = "info";
             adv1.Text = advance;
 
             advance = "-하향주- ";
@@ -128,10 +141,14 @@ namespace kwangwoonmoon
                     }
                 }
             }
-            var adv2 = middle2.SubItems.Add(new ListViewItem.ListViewSubItem());
-            adv2.Name = "advance";
+            ListViewItem adv2 = infoListView.Items.Add(new ListViewItem());
+            adv2.Name = "info";
             adv2.Text = advance;
+        }
 
+        public void SetInfoListViewClear()
+        {
+            infoListView.Items.Clear();
         }
 
         private void OKButton_Click(object sender, EventArgs e)
@@ -157,8 +174,7 @@ namespace kwangwoonmoon
             eventListView.Columns.Add(EventListColumnType.Title.ToString(), "제목");
             eventListView.Columns[eventListView.Columns.Count - 1].Width = -1;
 
-            infoListView.Columns.Add("middle", "중급정보");
-            infoListView.Columns.Add("advance", "고급정보");
+            infoListView.Columns.Add("info", "구매한 정보");
 
             // Test
             eventListView.Columns.Add("target", "Stock");

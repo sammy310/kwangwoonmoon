@@ -181,8 +181,8 @@ namespace kwangwoonmoon
                 return;
             }
 
+            SetClearToInfoListView();
             SetEventToEventNInfo();
-            setInfoToEventNInfo();
             SetTransactionListView();
             SetToInfoShop();
 
@@ -276,13 +276,38 @@ namespace kwangwoonmoon
             eventNInfo.SetEventListView(CurrentEvents);
         }
 
-        void setInfoToEventNInfo()
+        void SetInfoToEventNInfo(object obj)
+        {
+            if (eventNInfo == null) return;
+            if((string)obj == "middle")
+            {
+                eventNInfo.SetMiddleInfoListView(CurrentEvents);
+            }
+            else if ((string)obj == "advance")
+            {
+                eventNInfo.SetAdvanceInfoListView(CurrentEvents);
+            }
+        }
+        public void SetMiddleInfoToEventNInfo(object obj)
         {
             if (eventNInfo == null) return;
 
-            eventNInfo.SetInfoListView(CurrentEvents);
+            eventNInfo.SetMiddleInfoListView(CurrentEvents);
         }
 
+        public void SetAdvanceInfoToEventNInfo(object obj)
+        {
+            if (eventNInfo == null) return;
+
+            eventNInfo.SetAdvanceInfoListView(CurrentEvents);
+        }
+
+        void SetClearToInfoListView()
+        {
+            if (eventNInfo == null) return;
+
+            eventNInfo.SetInfoListViewClear();
+        }
 
         // Stock
 
@@ -417,6 +442,7 @@ namespace kwangwoonmoon
             {
                 infoShop = new InfoShop();
                 infoShop.Owner = this;
+                infoShop.FormSendEvent += new InfoShop.FormSendDataHandler(SetInfoToEventNInfo);
 
                 SetToInfoShop();
             }
@@ -459,7 +485,6 @@ namespace kwangwoonmoon
                 eventNInfo.Owner = this;
 
                 SetEventToEventNInfo();
-                setInfoToEventNInfo();
             }
 
             eventNInfo.Show();

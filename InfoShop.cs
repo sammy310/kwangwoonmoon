@@ -12,6 +12,8 @@ namespace kwangwoonmoon
 {
     public partial class InfoShop : Form
     {
+        public delegate void FormSendDataHandler(string obj);
+        public event FormSendDataHandler FormSendEvent;
         // 정보 가격
         public const int MIDDLE = 5000;
         public const int ADVANCE = 12000;
@@ -111,6 +113,7 @@ namespace kwangwoonmoon
                     MessageBox.Show(stocks, "중급 정보");
                     this.Count--;
                     MiddleInfo_button.Enabled = false;
+                    this.FormSendEvent("middle");
                 }
                 else MessageBox.Show("보유 금액이 부족합니다.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -150,6 +153,7 @@ namespace kwangwoonmoon
                     MessageBox.Show(stocks, "고급 정보");
                     this.Count--;
                     AdvanceInfo_button.Enabled = false;
+                    this.FormSendEvent("advance");
                 }
                 else MessageBox.Show("보유 금액이 부족합니다.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
