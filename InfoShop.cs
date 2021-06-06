@@ -134,7 +134,7 @@ namespace kwangwoonmoon
                         {
                             if (!stocks.Contains(stock.StockName))
                             {
-                                stocks += stock.StockName + " : " + stock.NextStockRatio + "%\n";
+                                stocks += string.Format("{0} : {1:N2}%\n", stock.StockName, stock.NextStockRatio);
                             }
                         }
                     }
@@ -145,7 +145,7 @@ namespace kwangwoonmoon
                         {
                             if (!stocks.Contains(stock.StockName))
                             {
-                                stocks += stock.StockName + " : " + stock.NextStockRatio + "%\n";
+                                stocks += string.Format("{0} : {1:N2}%\n", stock.StockName, stock.NextStockRatio);
                             }
                         }
                     }
