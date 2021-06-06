@@ -68,7 +68,7 @@ namespace kwangwoonmoon
             this.eventListView.HideSelection = false;
             this.eventListView.Location = new System.Drawing.Point(0, 0);
             this.eventListView.Name = "eventListView";
-            this.eventListView.Size = new System.Drawing.Size(375, 528);
+            this.eventListView.Size = new System.Drawing.Size(375, 328);
             this.eventListView.TabIndex = 1;
             this.eventListView.UseCompatibleStateImageBehavior = false;
             // 
@@ -78,14 +78,14 @@ namespace kwangwoonmoon
             this.infoListView.HideSelection = false;
             this.infoListView.Location = new System.Drawing.Point(0, 0);
             this.infoListView.Name = "infoListView";
-            this.infoListView.Size = new System.Drawing.Size(380, 528);
+            this.infoListView.Size = new System.Drawing.Size(380, 328);
             this.infoListView.TabIndex = 1;
             this.infoListView.UseCompatibleStateImageBehavior = false;
             // 
             // OKButton
             // 
             this.OKButton.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.OKButton.Location = new System.Drawing.Point(340, 600);
+            this.OKButton.Location = new System.Drawing.Point(340, 400);
             this.OKButton.Name = "OKButton";
             this.OKButton.Size = new System.Drawing.Size(100, 35);
             this.OKButton.TabIndex = 2;
@@ -108,7 +108,7 @@ namespace kwangwoonmoon
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.infoListView);
-            this.splitContainer1.Size = new System.Drawing.Size(759, 528);
+            this.splitContainer1.Size = new System.Drawing.Size(759, 328);
             this.splitContainer1.SplitterDistance = 375;
             this.splitContainer1.TabIndex = 3;
             // 
@@ -116,12 +116,12 @@ namespace kwangwoonmoon
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(784, 661);
+            this.ClientSize = new System.Drawing.Size(784, 461);
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.OKButton);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.MinimumSize = new System.Drawing.Size(800, 700);
+            this.MinimumSize = new System.Drawing.Size(800, 500);
             this.Name = "EventNInfo";
             this.Text = "뉴스 / 정보";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.EventNInfo_FormClosing);

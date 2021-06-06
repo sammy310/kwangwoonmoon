@@ -59,7 +59,7 @@ namespace kwangwoonmoon
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("굴림", 12F);
-            this.label2.Location = new System.Drawing.Point(38, 48);
+            this.label2.Location = new System.Drawing.Point(12, 49);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(40, 16);
             this.label2.TabIndex = 0;
@@ -113,27 +113,27 @@ namespace kwangwoonmoon
             // 
             // MiddleInfo_button
             // 
-            this.MiddleInfo_button.Location = new System.Drawing.Point(101, 308);
+            this.MiddleInfo_button.Location = new System.Drawing.Point(88, 298);
             this.MiddleInfo_button.Name = "MiddleInfo_button";
-            this.MiddleInfo_button.Size = new System.Drawing.Size(75, 23);
+            this.MiddleInfo_button.Size = new System.Drawing.Size(100, 33);
             this.MiddleInfo_button.TabIndex = 2;
             this.MiddleInfo_button.UseVisualStyleBackColor = true;
             this.MiddleInfo_button.Click += new System.EventHandler(this.MiddleInfo_button_Click);
             // 
             // AdvanceInfo_button
             // 
-            this.AdvanceInfo_button.Location = new System.Drawing.Point(394, 308);
+            this.AdvanceInfo_button.Location = new System.Drawing.Point(384, 298);
             this.AdvanceInfo_button.Name = "AdvanceInfo_button";
-            this.AdvanceInfo_button.Size = new System.Drawing.Size(75, 23);
+            this.AdvanceInfo_button.Size = new System.Drawing.Size(100, 33);
             this.AdvanceInfo_button.TabIndex = 2;
             this.AdvanceInfo_button.UseVisualStyleBackColor = true;
             this.AdvanceInfo_button.Click += new System.EventHandler(this.AdvanceInfo_button_Click);
             // 
             // OK_button
             // 
-            this.OK_button.Location = new System.Drawing.Point(248, 381);
+            this.OK_button.Location = new System.Drawing.Point(237, 359);
             this.OK_button.Name = "OK_button";
-            this.OK_button.Size = new System.Drawing.Size(75, 23);
+            this.OK_button.Size = new System.Drawing.Size(103, 39);
             this.OK_button.TabIndex = 2;
             this.OK_button.Text = "닫기";
             this.OK_button.UseVisualStyleBackColor = true;
@@ -143,10 +143,10 @@ namespace kwangwoonmoon
             // 
             this.Mymoney_label.AutoSize = true;
             this.Mymoney_label.BackColor = System.Drawing.Color.White;
-            this.Mymoney_label.Font = new System.Drawing.Font("굴림", 10F);
-            this.Mymoney_label.Location = new System.Drawing.Point(206, 89);
+            this.Mymoney_label.Font = new System.Drawing.Font("굴림", 12F);
+            this.Mymoney_label.Location = new System.Drawing.Point(177, 89);
             this.Mymoney_label.Name = "Mymoney_label";
-            this.Mymoney_label.Size = new System.Drawing.Size(175, 14);
+            this.Mymoney_label.Size = new System.Drawing.Size(176, 16);
             this.Mymoney_label.TabIndex = 3;
             this.Mymoney_label.Text = "                0                ";
             // 
@@ -155,7 +155,7 @@ namespace kwangwoonmoon
             this.News_label.AutoSize = true;
             this.News_label.BackColor = System.Drawing.Color.White;
             this.News_label.Font = new System.Drawing.Font("굴림", 10F);
-            this.News_label.Location = new System.Drawing.Point(99, 51);
+            this.News_label.Location = new System.Drawing.Point(58, 52);
             this.News_label.Name = "News_label";
             this.News_label.Size = new System.Drawing.Size(167, 14);
             this.News_label.TabIndex = 3;
@@ -178,6 +178,7 @@ namespace kwangwoonmoon
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
+            this.MinimumSize = new System.Drawing.Size(590, 0);
             this.Name = "InfoShop";
             this.Text = "정보 상점";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.InfoShop_FormClosing);

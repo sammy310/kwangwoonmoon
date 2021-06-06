@@ -390,7 +390,7 @@ namespace kwangwoonmoon
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1250, 723);
+            this.ClientSize = new System.Drawing.Size(1250, 738);
             this.Controls.Add(this.trade_button);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.minus_button);
@@ -421,7 +421,7 @@ namespace kwangwoonmoon
             this.Controls.Add(this.stock_listview);
             this.Controls.Add(this.labe1);
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.MinimumSize = new System.Drawing.Size(1227, 646);
+            this.MinimumSize = new System.Drawing.Size(1266, 777);
             this.Name = "KWM";
             this.Text = "Kwang Woon Moon";
             this.Load += new System.EventHandler(this.KWM_Load);
