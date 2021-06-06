@@ -33,26 +33,6 @@ namespace kwangwoonmoon
                 ListViewItem item = eventListView.Items.Add(new ListViewItem());
                 item.Name = EventListColumnType.Title.ToString();
                 item.Text = e.Title;
-
-                // Test
-                var target = item.SubItems.Add(new ListViewItem.ListViewSubItem());
-                target.Name = "target";
-                string newTargetStr = "";
-                foreach (var st in e.influenceStock)
-                {
-                    newTargetStr += (st.StockName + ", ");
-                }
-                target.Text = newTargetStr;
-
-                var ratio = item.SubItems.Add(new ListViewItem.ListViewSubItem());
-                ratio.Name = "ratio";
-                string newRatioStr = "";
-                foreach(var isP in e.IsPositiveEvent)
-                {
-                    newRatioStr += isP.ToString() + ", ";
-                }
-                ratio.Text = newRatioStr;
-                // --------------------
             }
         }
 
@@ -172,15 +152,10 @@ namespace kwangwoonmoon
             infoListView.View = View.Details;
 
             eventListView.Columns.Add(EventListColumnType.Title.ToString(), "제목");
-            eventListView.Columns[eventListView.Columns.Count - 1].Width = -1;
+            eventListView.Columns[eventListView.Columns.Count - 1].Width = -2;
 
             infoListView.Columns.Add("info", "구매한 정보");
-            infoListView.Columns[infoListView.Columns.Count - 1].Width = -1;
-
-            // Test
-            eventListView.Columns.Add("target", "Stock");
-            eventListView.Columns.Add("ratio", "등락률");
-            // --------------------
+            infoListView.Columns[infoListView.Columns.Count - 1].Width = -2;
         }
     }
 }
