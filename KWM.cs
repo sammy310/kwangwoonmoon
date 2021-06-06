@@ -25,8 +25,8 @@ namespace kwangwoonmoon
         List<Stock> stocks = new List<Stock>();
         List<TransactionInfo> transactionList = new List<TransactionInfo>();
 
-        public static int DefaultEventSize = 3;
-        public static int DefaultRandomEventSize = 2;
+        public static int DefaultEventSize = 6;
+        public static int DefaultRandomEventSize = 4;
         List<Event> ReferenceEvents = new List<Event>();
         List<List<Event>> events = new List<List<Event>>();
         List<Event> CurrentEvents
@@ -232,9 +232,16 @@ namespace kwangwoonmoon
 
         void UpdateEventStockRatio()
         {
+            // Stock 등락률 갱신
             foreach (Event e in CurrentEvents)
             {
-                e.StockUpdate(); // Stock 등락률 갱신
+                e.StockUpdate();
+            }
+
+            // 랜덤 생성
+            foreach (Stock stock in stocks)
+            {
+                stock.CheckStockRatio();
             }
         }
 

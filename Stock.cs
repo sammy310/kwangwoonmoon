@@ -45,6 +45,15 @@ namespace kwangwoonmoon
         public void AddStockRatio(float newRatio)
         {
             NextStockRatio += newRatio;
+            NextStockRatio /= 2f;
+        }
+
+        public void CheckStockRatio()
+        {
+            if (NextStockRatio == 0)
+            {
+                AddStockRatio((float)KWM.random.NextDouble() * 15f - 5f);
+            }
         }
 
         // StockRatio를 NextStockRatio로 갱신

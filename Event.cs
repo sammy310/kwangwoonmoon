@@ -98,7 +98,12 @@ namespace kwangwoonmoon
 
         float GetInfluencePower(bool isPositive)
         {
-            return (isPositive) ? ((float)KWM.random.NextDouble()) * 100f : -(float)KWM.random.NextDouble() * 30f;
+            float randomPower = (InfluenceStockSize == 0) ? 5f : 120 / InfluenceStockSize;
+            float power = (float)KWM.random.NextDouble() * randomPower;
+            if (isPositive)
+                return power;
+            else
+                return -power;
         }
 
 
